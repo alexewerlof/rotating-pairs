@@ -6,7 +6,7 @@ var path = require('path');
 const options =  {
   frontendRoot: 'www',
   port: 3000
-}
+};
 const BABEL_OPTIONS = {
   presets: ['es2015'],
   plugins: [],
@@ -18,7 +18,7 @@ app.get('/*.es', function (req, res, next) {
     dir: options.frontendRoot,
     base : req.url
   });
-  console.log(`Compiling file: ${fileName}`);
+  console.log('Compiling file: ${fileName}');
   try {
     babel.transformFile(fileName, BABEL_OPTIONS, (err, result) => {
       if (err) {
@@ -28,12 +28,12 @@ app.get('/*.es', function (req, res, next) {
       }
     });
   } catch (e) {
-    res.status(404).send(`Cannot find ${fileName}`);
+    res.status(404).send('Cannot find ${fileName}');
   }
 });
 
 app.use(express.static(options.frontendRoot));
 
 app.listen(options.port, function () {
-  console.log(`Listenning on ${options.port}`);
+  console.log(`Listening on ${options.port}`);
 });
