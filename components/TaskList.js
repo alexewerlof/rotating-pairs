@@ -1,30 +1,36 @@
 import React, { PropTypes } from 'react'
+import Task from './Task'
 
-let TaskList = ({ tasks }) => {
-  if (tasks.length > 0) {
+let TaskList = ({ onTaskChange, tasks }) => {
+  if (tasks && tasks.length > 0) {
     return <table>
-      <tr>
-        <th>Team 1</th>
-        <th>Task</th>
-        <th>Team 2</th>
-      </tr>
-      { tasks.map(task =>
-        <tr>
-          <td><input type="text" value="{task.pair[0]}" /></td>
-          <td><input type="text" value="{task.label}" /></td>
-          <td><input type="text" value="{task.pair[1]}" /></td>
-        </tr>
-      )}
+        <thead>
+          <tr>
+            <th>Team 1</th>
+            <th>Task</th>
+            <th>Team 2</th>
+          </tr>
+        </thead>
+        <tbody>
+        { tasks.map(task =>
+          <Task
+            key = { task.id }
+            { ...task }
+            onChange = { (property, value, propertyIndex) => onTaskChange(task.id, property, value, propertyIndex) }
+          />
+        )}
+        </tbody>
       </table>
   }
-  return ""
+  return <div/>
 }
 
 TaskList.propTypes = {
   tasks: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number.isRequired,
     label: PropTypes.string.isRequired,
-    pairs: PropTypes.arrayOf(PropTypes.string).isRequired
-  }).isRequired)
+    pair: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired
+  }).isRequired),
+  onTaskChange: PropTypes.func.isRequired
 }
 export default TaskList

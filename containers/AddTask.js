@@ -1,15 +1,15 @@
 import AddTaskButton from '../components/AddTaskButton'
-import connect from 'react-redux'
-import addTask from '../actions'
+import { connect } from 'react-redux'
+import { addTask } from '../actions'
 
 const mapDispatchToProps = (dispatch) => {
   return {
     onClick: () => {
-      dispatch(addTask)
+      dispatch(addTask())
     }
   }
 }
 
-let AddTask = connect(null, mapDispatchToProps)(AddTask)
+let AddTask = connect(null, mapDispatchToProps)(AddTaskButton)
 
 export default AddTask
