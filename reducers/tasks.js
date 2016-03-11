@@ -11,7 +11,6 @@ const tasks = (state = [], action) => {
     case 'add-task':
       return [...state, { id: action.id, label: '', pair: ['', ''] }]
     case 'rotate-pairs':
-      console.log(action)
       if (state.length > 1) {
         let previous = state[action.direction === 1 ? state.length - 1 : 0].pair[action.pairMember]
         for (let i = 0, ln = state.length; i < ln; i++) {
@@ -20,7 +19,6 @@ const tasks = (state = [], action) => {
           state[index].pair[action.pairMember] = previous
           previous = current
         }
-        console.log(state)
       }
       return state
     default:
